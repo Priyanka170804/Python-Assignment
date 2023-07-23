@@ -1,0 +1,216 @@
+import pandas as pd
+S = pd.Series([11, 28, 72, 3, 5, 8])
+S
+
+print(S.index)
+print(S.values)
+
+
+fruits = ['apples', 'oranges', 'cherries', 'pears']
+S = pd.Series([20, 33, 52, 10], index=fruits)
+S2 = pd.Series([17, 13, 31, 32], index=fruits)
+print(S + S2)
+print("sum of S: ", sum(S))
+
+fruits = ['peaches', 'oranges', 'cherries', 'pears']
+fruits2 = ['raspberries', 'oranges', 'cherries', 'pears']
+S = pd.Series([20, 33, 52, 10], index=fruits)
+S2 = pd.Series([17, 13, 31, 32], index=fruits2)
+print(S + S2)
+
+import pandas as pd
+sr = pd.Series(['New York', 'Chicago', 'Toronto', 'Lisbon', 'Rio', 'Moscow'])
+
+didx = pd.DatetimeIndex('2014-08-01 10:00', freq ='W',
+					periods = 6, tz = 'Europe/Berlin')
+
+sr.index = didx
+print(sr)
+    
+
+Q6. Using indexing write the code to access single values of a Series ?
+
+print(S['apples'])
+
+Q7. Write a code for Manipulating Pandas Data frame using Applying lambda function to a column?
+
+import pandas as pd
+values = [['Rohan', 455], ['Elvish', 250], ['Deepak', 495],
+          ['Sai', 400], ['Radha', 350], ['Vansh', 450]]
+  
+df = pd.DataFrame(values, columns=['Name', 'Univ_Marks'])
+df = df.assign(Percentage=lambda x: (x['Univ_Marks'] / 500 * 100))
+df
+
+Q8.  How to create a Series object in pandas for the resulting Series to contain the dict's keys as the indices and the values as the values?
+cities = {"London":    8615246, 
+          "Berlin":    3562166, 
+          "Madrid":    3165235, 
+          "Rome":      2874038, 
+          "Paris":     2273305, 
+          "Vienna":    1805681, 
+          "Bucharest": 1803425, 
+          "Hamburg":   1760433,
+          "Budapest":  1754000,
+          "Warsaw":    1740119,
+          "Barcelona": 1602386,
+          "Munich":    1493900,
+          "Milan":     1350680}
+city_series = pd.Series(cities)
+print(city_series)
+
+#Q9. Three series are defined using pandas write the code to concantenate and show the output display ?
+
+import pandas as pd
+years = range(2014, 2018)
+shop1 = pd.Series([2409.14, 2941.01, 3496.83, 3119.55], index=years)
+shop2 = pd.Series([1203.45, 3441.62, 3007.83, 3619.53], index=years)
+shop3 = pd.Series([3412.12, 3491.16, 3457.19, 1963.10], index=years)
+pd.concat([shop1, shop2, shop3])
+
+#Q10. Give an example to derive a dataframe from a dictionary using pandas library function ?
+
+cities = {"name": ["London", "Berlin", "Madrid", "Rome", 
+                   "Paris", "Vienna", "Bucharest", "Hamburg", 
+                   "Budapest", "Warsaw", "Barcelona", 
+                   "Munich", "Milan"],
+          "population": [8615246, 3562166, 3165235, 2874038,
+                         2273305, 1805681, 1803425, 1760433,
+                         1754000, 1740119, 1602386, 1493900,
+                         1350680],
+          "country": ["England", "Germany", "Spain", "Italy",
+                      "France", "Austria", "Romania", 
+                      "Germany", "Hungary", "Poland", "Spain",
+                      "Germany", "Italy"]}
+city_frame = pd.DataFrame(cities)
+city_frame
+
+#Q11. Give an example to derive a dataframe from a dictionary using pandas function?
+
+
+import pandas
+data = {'Ojaswi': {'Age': 15, 'subject': 'java', 'Address': 'Hyderabad'},
+        'Rohith':  {'Age': 9, 'subject': 'python', 'Address': 'Hyderabad'},
+        'Gnanesh':  {'Age': 15, 'subject': 'c/c++', 'Address': 'Guntur'},
+        'divya':  {'Age': 21, 'subject': 'html', 'Address': 'ponnur'},
+        'ramya':  {'Age': 15, 'subject': 'c/c++', 'Address': 'delhi'}}
+  
+data = pandas.DataFrame(data)
+data
+
+#Q12.  Give the program to change both the column order and the ordering of the index with the function reindex ?
+city_frame.reindex(index=[0, 2, 4, 6,  8, 10, 12, 1, 3, 5, 7, 9, 11], 
+                   columns=['country', 'name', 'population'])
+
+Q13. Write the code to rename a dataframe using pandas library function?
+city_frame.rename(columns={"name":"Soyadı", 
+                           "country":"Ülke", 
+                           "population":"Nüfus"},
+                 inplace=True)
+city_frame
+
+#Q14.  Write the program for accessing row via indexing value ie select the  German cities in the following example by using 'loc' ?
+city_frame = pd.DataFrame(cities, 
+                          columns=("name", "population"), 
+                          index=cities["country"])
+print(city_frame.loc["Germany"])
+
+#Q15 . Write a program to perform a pivot table format by reshaping a dataframe in pandas library function ?
+import pandas as pd
+d = {'A': ['kırmızı', 'yeşil', 'mavi', 'kırmızı', 'yeşil', 'mavi'],
+     'B': ['bir', 'iki', 'bir',  'iki',  'bir', 'iki'],
+     'C': [345, 325, 898, 989, 23, 143],
+     'D': [1, 2, 3, 4, 5, 6]}
+df = pd.DataFrame(d)
+df
+
+#Q16.  Write a program where a Series object with an index of size nvalues. The index will not be unique, because the strings for the index are taken from the list fruits, which has less elements than nvalues ?
+import pandas as pd
+import numpy as np
+import random
+nvalues = 30
+values = np.random.randint(1, 20, (nvalues,))
+fruits = ["bananas", "oranges", "apples", "clementines", "cherries", "pears"]
+fruits_index = np.random.choice(fruits, (nvalues,))
+s = pd.Series(values, index=fruits_index)
+print(s[:10])
+
+
+#Q17. Write a program to get the given series in sorted label form using groupby function so that the solution is gropby iterable form ?
+grouped = s.groupby(s.index)
+for fruit, s_obj in grouped:
+    print(f"===== {fruit} =====")
+    print(s_obj)
+
+#Q18.  The DataFrame has two columns one containing names Name and the other one coffee contains integers which are the number of cups of coffee the person drank.Write the code to sort using pandas groupby?
+import pandas as pd
+beverages = pd.DataFrame({'Name': ['Robert', 'Melinda', 'Brenda',
+                                   'Samantha', 'Melinda', 'Robert',
+                                   'Melinda', 'Brenda', 'Samantha'],
+                          'Coffee': [3, 0, 2, 2, 0, 2, 0, 1, 3],
+                          'Tea':    [0, 4, 2, 0, 3, 0, 3, 2, 0]})    
+beverages
+
+#Q19. Write the program to calculate the average number of coffee and tea cups the persons had using gropby function in pandas?
+beverages.groupby(['Name']).mean()
+
+
+#Q20.  Write a program with function ‘find bin’ with two list or tuple of bins of two elements to find the index of the interval where thw vale’value’ is contained?
+def find_bin(value, bins):
+    for i in range(0, len(bins)):
+        if bins[i][0] <= value < bins[i][1]:
+            return i
+    return-1
+from collections import Counter
+bins = create_bins(lower_bound=50,
+                   width=4,
+                   quantity=10)
+print(bins)
+weights_of_persons = [73.4, 69.3, 64.9, 75.6, 74.9, 80.3, 
+                      78.6, 84.1, 88.9, 90.3, 83.4, 69.3, 
+                      52.4, 58.3, 67.4, 74.0, 89.3, 63.4]
+binned_weights = []
+for value in weights_of_persons:
+    bin_index = find_bin(value, bins)
+    print(value, bin_index, bins[bin_index])
+    binned_weights.append(bin_index)
+    frequencies = Counter(binned_weights)
+print(frequencies)
+
+#Q21.Write a python code for filled color using contour plot .
+import matplotlib.pyplot as plt
+import numpy as np
+fig = plt.figure(figsize=(6,5))
+left, bottom, width, height = 0.1, 0.1, 0.8, 0.8
+ax = fig.add_axes([left, bottom, width, height]) 
+start, stop, n_values = -8, 8, 800
+x_vals = np.linspace(start, stop, n_values)
+y_vals = np.linspace(start, stop, n_values)
+X, Y = np.meshgrid(x_vals, y_vals)
+Z = np.sqrt(X*2 + Y*2)
+cp = plt.contourf(X, Y, Z)
+plt.colorbar(cp)
+ax.set_title('Contour Plot')
+ax.set_xlabel('x (cm)')
+ax.set_ylabel('y (cm)')
+plt.show()
+
+#Q22.Write a python code for to displaty individual color using contour plot.
+import numpy as np
+import matplotlib.pyplot as plt
+xlist = np.linspace(-3.0, 3.0, 100)
+ylist = np.linspace(-3.0, 3.0, 100)
+X, Y = np.meshgrid(xlist, ylist)
+Z = np.sqrt(X*2 + Y*2)
+plt.figure()
+contour = plt.contour(X, Y, Z)
+plt.clabel(contour, colors = 'k', fmt = '%2.1f', fontsize=12)
+c = ('#ff0000', '#ffff00', '#0000FF', '0.6', 'c', 'm')
+contour_filled = plt.contourf(X, Y, Z, colors=c)
+plt.colorbar(contour_filled)
+plt.title('Filled Contours Plot')
+plt.xlabel('x (cm)')
+plt.ylabel('y (cm)')
+plt.savefig('contourplot_own_colours.png', dpi=300)
+plt.show()
+
